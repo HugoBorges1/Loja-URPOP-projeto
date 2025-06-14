@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Notable'; 
+  src: url('/fonts/Notable-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer components {
+  .font-notable { 
+    font-family: 'Notable', sans-serif;
+  }
+}

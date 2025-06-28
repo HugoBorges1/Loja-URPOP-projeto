@@ -21,6 +21,7 @@ import { useUserStore } from "./stores/useUserStore";
 import { useCartStore } from "./stores/useCartStore";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -50,6 +51,8 @@ function App() {
       </header>
 
       <main className='flex-grow relative z-10 pt-16'>
+
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />

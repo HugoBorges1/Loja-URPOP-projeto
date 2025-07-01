@@ -98,7 +98,7 @@ Dentro da pasta frontend, execute o seguinte comando:
 
 Agora, com todas as dependências instaladas e com o ".env" configurado, você está pronto para executar a aplicação localmente.
 
-Abra duas instâncias do terminal no vs code, a instância que estiver na raiz do projeto, execute:
+Abra duas instâncias do terminal no vs code, na instância que estiver na raiz do projeto, execute:
 
     npm run dev
 

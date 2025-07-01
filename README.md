@@ -1,7 +1,6 @@
 Para rodar essa aplicação localmente, você deverá:
 
-Instalar o Node.js
-Instalar o VScode
+Instalar o Node.js e instalar o VScode
 
 Baixar os arquivos (.zip) do respositório
 

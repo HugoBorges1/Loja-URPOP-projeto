@@ -76,20 +76,25 @@ Se por ventura, enfrentar o seguinte erro:
         + FullyQualifiedErrorId : UnauthorizedAccess
     
     
-    	Acesse o power shell do windows (em modo administrador):
+Acesse o PowerShell do windows (em modo administrador) e execute o seguinte comando: 
 
-Execute no terminal: 
-  Get-ExecutionPolicy
+    Get-ExecutionPolicy
 
-Se a saída for restricted, execute o seguinte comando: 
-  Set-ExecutionPolicy RemoteSigned
+Se a saída for "restricted", execute o seguinte comando: 
 
-Agora sim, execute na raiz do projeto: npm i express dotenv mongoose jsonwebtoken stripe cloudinary cookie-parser bcryptjs ioredis
+    Set-ExecutionPolicy RemoteSigned
 
-Digite no terminal: cd ./frontend/ 
+Agora sim, execute na raiz do projeto: 
 
-Execute o seguinte comando: 
-npm install
+    npm i express dotenv mongoose jsonwebtoken stripe cloudinary cookie-parser bcryptjs ioredis
+
+Agora, digite no terminal: 
+
+    cd ./frontend/ 
+
+Dentro da pasta frontend, execute o seguinte comando:
+
+    npm install
 
 Agora, com todas as dependências instaladas e com o ".env" configurado, você está pronto para executar a aplicação localmente.
 

@@ -98,7 +98,7 @@ Abra duas instâncias do terminal no vs code, a instância que estiver na raiz d
 
     npm run dev
 
-Na instância, escreva "cd ./frontend/" e execute:
+Na outra instância, escreva "cd ./frontend/" e execute:
 
     npm run dev
 

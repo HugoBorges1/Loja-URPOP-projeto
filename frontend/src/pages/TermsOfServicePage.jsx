@@ -1,19 +1,23 @@
 import { motion } from 'framer-motion';
 
+// Componente que renderiza a página estática de "Termos de Uso".
 const TermsOfServicePage = () => {
+    // Define as variantes de animação para o contêiner principal das seções de texto.
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0 }, // Estado inicial: invisível.
         visible: {
-            opacity: 1,
+            opacity: 1, // Estado final: visível.
             transition: {
+                // 'staggerChildren' cria um efeito de cascata, animando os filhos (as seções) um após o outro com um pequeno atraso.
                 staggerChildren: 0.1,
             },
         },
     };
 
+    // Define as variantes de animação para cada item (seção) individualmente.
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: 20 }, // Estado inicial: invisível e ligeiramente deslocado para baixo.
+        visible: { opacity: 1, y: 0 },   // Estado final: visível e na sua posição original.
     };
 
     return (
@@ -33,12 +37,14 @@ const TermsOfServicePage = () => {
                     </p>
                 </div>
 
+                {/* Este contêiner 'motion.div' orquestra a animação em cascata de seus filhos. */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                     className="space-y-8 text-gray-300 font-sans leading-relaxed"
                 >
+                    {/* Cada 'motion.section' é um item filho que será animado individualmente. */}
                     <motion.section variants={itemVariants}>
                         <h2 className="text-2xl font-bold text-white mb-3">1. Bem-vindo à URPOP!</h2>
                         <p>Ao acessar e usar o site da URPOP (urpop.com.br), você concorda em cumprir e aceitar estes Termos de Uso. Estes termos aplicam-se a todos os visitantes e usuários. Se você não concordar com qualquer parte dos termos, não poderá acessar o serviço.</p>

@@ -1,19 +1,23 @@
 import { motion } from 'framer-motion';
 
+// Componente que renderiza a página estática de "Política de Privacidade".
 const PrivacyPolicyPage = () => {
+    // Define as variantes de animação para o contêiner principal das seções.
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0 }, // Estado inicial: invisível.
         visible: {
-            opacity: 1,
+            opacity: 1, // Estado final: visível.
             transition: {
+                // 'staggerChildren' cria um efeito de cascata, animando os filhos um após o outro.
                 staggerChildren: 0.1,
             },
         },
     };
 
+    // Define as variantes de animação para cada item (seção) individual.
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: 20 }, // Estado inicial: invisível e ligeiramente abaixo.
+        visible: { opacity: 1, y: 0 },   // Estado final: visível e na posição correta.
     };
 
     return (
@@ -33,12 +37,14 @@ const PrivacyPolicyPage = () => {
                     </p>
                 </div>
 
+                {/* Contêiner que orquestra a animação de seus filhos ('motion.section'). */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                     className="space-y-8 text-gray-300 font-sans leading-relaxed"
                 >
+                    {/* Cada 'motion.section' é um filho que será animado de acordo com as 'itemVariants'. */}
                     <motion.section variants={itemVariants}>
                         <h2 className="text-2xl font-bold text-white mb-3">1. Nosso Compromisso</h2>
                         <p>A URPOP valoriza sua privacidade. Esta política descreve como coletamos, usamos e protegemos suas informações pessoais quando você utiliza nosso site e serviços. Ao usar nosso site, você concorda com a coleta e uso de informações de acordo com esta política.</p>

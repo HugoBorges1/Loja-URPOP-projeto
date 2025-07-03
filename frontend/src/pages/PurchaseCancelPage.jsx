@@ -2,9 +2,11 @@ import { XCircle, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+// Componente que renderiza a página de cancelamento de compra.
 const PurchaseCancelPage = () => {
 	return (
 		<div className='py-45 flex items-center justify-center px-4'>
+			{/* Contêiner principal com animação de entrada para o card. */}
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -12,15 +14,17 @@ const PurchaseCancelPage = () => {
 				className='max-w-md w-full bg-black rounded-lg shadow-xl overflow-hidden relative z-10'
 			>
 				<div className='p-6 sm:p-8'>
+					{/* Exibe um ícone de "cancelado", o título e uma mensagem informativa. */}
 					<div className='flex justify-center'>
 						<XCircle className='text-red-400 w-16 h-16 mb-4' />
 					</div>
 					<h1 className='text-2xl sm:text-3xl font-bold text-center text-red-400 mb-2'>Compra cancelada</h1>
 					<p className='text-white text-center mb-6'>
-						Seu pedido foi cancelado, nenhuma cobrança será feita. 
+						Seu pedido foi cancelado, nenhuma cobrança será feita.
 						Muito obrigado e perdão o incoveniente.
 					</p>
-				
+
+					{/* Botão que leva o usuário de volta para a página inicial da loja. */}
 					<div className='space-y-4'>
 						<Link
 							to={"/"}

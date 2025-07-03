@@ -6,25 +6,33 @@ import axios from "../lib/axios";
 import Confetti from "react-confetti";
 import LoadingSpinner from "../components/LoadingSpinner";
 
+// Componente que renderiza a página de sucesso após uma compra bem-sucedida.
 const PurchaseSuccessPage = () => {
+    // Estados para controlar os detalhes do pedido, o processamento e erros.
     const [orderDetails, setOrderDetails] = useState({ id: null, number: null });
     const [isProcessing, setIsProcessing] = useState(true);
     const { clearCart } = useCartStore();
     const [error, setError] = useState(null);
 
+    // Hook que é executado após a montagem para processar o sucesso do checkout.
     useEffect(() => {
+        // Função assíncrona para comunicar com o backend e confirmar o sucesso do pagamento.
         const handleCheckoutSuccess = async (sessionId) => {
             try {
+                // Envia o ID da sessão para o backend para verificação e criação do pedido.
                 const res = await axios.post("/payments/checkout-success", { sessionId });
+                // Atualiza o estado com os detalhes do pedido e limpa o carrinho do usuário.
                 setOrderDetails({ id: res.data.orderId, number: res.data.orderNumber });
                 clearCart();
             } catch (error) {
                 setError(error.message || "Ocorreu um erro ao processar seu pedido.");
             } finally {
+                // Garante que o estado de processamento seja desativado, mesmo se ocorrer um erro.
                 setIsProcessing(false);
             }
         };
 
+        // Extrai o 'session_id' dos parâmetros da URL, que foi adicionado pelo Stripe no redirecionamento.
         const sessionId = new URLSearchParams(window.location.search).get("session_id");
         if (sessionId) {
             handleCheckoutSuccess(sessionId);
@@ -34,12 +42,13 @@ const PurchaseSuccessPage = () => {
         }
     }, [clearCart]);
 
+    // Renderização condicional com base no estado de processamento e erro.
     if (isProcessing) return <LoadingSpinner />;
-
     if (error) return `Erro: ${error}`;
 
     return (
         <div className='py-35 flex items-center justify-center px-4'>
+            {/* Componente de terceiros para exibir um efeito de confete na tela. */}
             <Confetti
                 width={window.innerWidth}
                 height={window.innerHeight}
@@ -65,9 +74,11 @@ const PurchaseSuccessPage = () => {
                         <p className='bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text text-center text-sm mb-6'>
                             Cheque "Meus Pedidos" para acompanhar os detalhes do seu pedido.
                         </p>
+                        {/* Exibe os detalhes do pedido, como o número e o tempo de entrega estimado. */}
                         <div className='bg-black rounded-lg p-4 mb-6'>
                             <div className='flex items-center justify-between mb-2'>
                                 <span className='text-sm text-white'>Número do pedido</span>
+                                {/* Link para a página "Meus Pedidos", incluindo o ID do novo pedido na URL para destaque. */}
                                 <Link
                                     to={`/my-orders#${orderDetails.id}`}
                                     className='text-sm font-semibold bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text hover:underline'

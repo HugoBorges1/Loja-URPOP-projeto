@@ -2,14 +2,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Target, Rocket, Heart } from 'lucide-react';
 
+// Componente que renderiza a página "Sobre Nós".
 const AboutUsPage = () => {
     return (
         <div className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="max-w-4xl mx-auto">
+                {/* Seção do título principal da página com animação de entrada. */}
                 <motion.div
-                    initial={{ opacity: 0, y: -50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
+                    initial={{ opacity: 0, y: -50 }} // Estado inicial da animação (invisível e acima da posição final).
+                    animate={{ opacity: 1, y: 0 }}   // Estado final da animação (visível e na posição correta).
+                    transition={{ duration: 0.7 }}    // Duração da animação.
                     className="text-center mb-16"
                 >
                     <h1 className="text-5xl sm:text-6xl font-notable bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text pb-2">
@@ -20,10 +22,11 @@ const AboutUsPage = () => {
                     </p>
                 </motion.div>
 
+                {/* Seção que conta a história de origem da URPOP. */}
                 <motion.div
-                    initial={{ opacity: 0, x: -100 }}
+                    initial={{ opacity: 0, x: -100 }} // Animação de entrada vindo da esquerda.
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.8, delay: 0.2 }} // A animação começa após um pequeno atraso.
                     className="bg-gray-900/40 p-8 rounded-2xl shadow-2xl mb-16 relative border border-white/10"
                 >
                     <div className="absolute -top-5 -left-5 w-16 h-16 bg-gradient-to-r from-[#606cfc] to-[#ff64c4] rounded-full flex items-center justify-center shadow-lg">
@@ -37,8 +40,9 @@ const AboutUsPage = () => {
                     </p>
                 </motion.div>
 
+                {/* Grid para exibir os cards de Missão e Visão lado a lado. */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.8 }} // Animação de escala (zoom in).
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="grid md:grid-cols-2 gap-8 mb-16"
@@ -64,6 +68,7 @@ const AboutUsPage = () => {
                     </div>
                 </motion.div>
 
+                {/* Seção final com um botão de "call to action" para explorar os produtos. */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}

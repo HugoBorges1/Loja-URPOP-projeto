@@ -4,8 +4,10 @@ import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "../stores/useUserStore";
 
+// Componente que renderiza a página de cadastro (signup).
 const SignUpPage = () => {
 
+  // Estado para armazenar os dados do formulário (nome, e-mail, senha).
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,13 +15,16 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
+  // Desestrutura a função de cadastro e o estado de carregamento do store de usuário (Zustand).
   const { signup, loading } = useUserStore();
 
+  // Função para lidar com o envio do formulário.
   const handleSubmit = (e) => {
-    e.preventDefault();
-    signup(formData);
+    e.preventDefault(); // Impede o comportamento padrão de recarregar a página.
+    signup(formData); // Chama a função de cadastro do store com os dados do formulário.
   };
 
+  // Define classes de CSS comuns para os campos de input para manter a consistência.
   const inputClasses =
     "block w-full px-3 py-2 pl-10 bg-black border border-white rounded-md " +
     "placeholder-gray-500 font-bold focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm";
@@ -27,6 +32,7 @@ const SignUpPage = () => {
   return (
 
     <div className='flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+      {/* Contêiner com animação de entrada para o formulário. */}
       <motion.div
         className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'
         initial={{ opacity: 0, y: 20 }}
@@ -40,6 +46,7 @@ const SignUpPage = () => {
           </h2>
 
           <form onSubmit={handleSubmit} className='space-y-6 py-8'>
+            {/* Seção do formulário para cada campo de input. */}
             <div>
               <label htmlFor='name' className='block text-sm font-medium text-white'>
                 Nome completo
@@ -136,12 +143,14 @@ const SignUpPage = () => {
               </div>
             </div>
 
+            {/* Botão de envio do formulário. */}
             <button
               type='submit'
               className='w-full flex items-center justify-center rounded-lg px-12 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-800 bg-gradient-to-r from-[#606cfc] to-[#ff64c4] hover:brightness-90 transition-all duration-200 whitespace-nowrap'
               disabled={loading}
 
             >
+              {/* Renderização condicional: mostra um spinner de carregamento ou o texto "Criar conta". */}
               {loading ? (
                 <>
                   <Loader className='mr-2 h-5 w-5 animate-spin' aria-hidden='true' />
@@ -158,6 +167,7 @@ const SignUpPage = () => {
             </button>
           </form>
 
+          {/* Link para a página de login para usuários que já têm uma conta. */}
           <p className='mt-8 text-center text-sm text-white'>
             Já tem uma conta?{" "}
             <Link

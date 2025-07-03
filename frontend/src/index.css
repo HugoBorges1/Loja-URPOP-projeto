@@ -1,14 +1,22 @@
+/* Importa as diretivas base, de componentes e de utilitários do Tailwind CSS. */
+/* Esta linha é fundamental para que o Tailwind funcione e aplique seus estilos. */
 @import "tailwindcss";
 
+/* Define uma fonte personalizada chamada 'Notable' para ser usada na aplicação. */
 @font-face {
-  font-family: 'Notable'; 
+  font-family: 'Notable';
+  /* Especifica o caminho para o arquivo da fonte. */
   src: url('/fonts/Notable-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
+/* Usa a diretiva '@layer' do Tailwind para criar uma nova classe de utilitário. */
 @layer components {
-  .font-notable { 
+
+  /* Cria a classe '.font-notable' que pode ser usada em qualquer elemento HTML */
+  /* para aplicar a fonte 'Notable' definida acima. */
+  .font-notable {
     font-family: 'Notable', sans-serif;
   }
 }

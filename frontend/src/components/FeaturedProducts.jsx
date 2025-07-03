@@ -4,16 +4,21 @@ import { useCartStore } from "../stores/useCartStore";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
+// Componente para exibir um carrossel de produtos em destaque.
 const FeaturedProducts = ({ featuredProducts }) => {
+	// Estado para controlar o índice do primeiro item visível no carrossel.
 	const [currentIndex, setCurrentIndex] = useState(0);
+	// Estado para controlar quantos itens são exibidos por vez, para a responsividade.
 	const [itemsPerPage, setItemsPerPage] = useState(4);
 	const { addToCart } = useCartStore();
 
+	// Função para adicionar um produto ao carrinho.
 	const handleAddToCart = (product) => {
 		toast.success("Produto adicionado! (Tamanho Padrão M)");
 		addToCart(product, "M");
 	};
 
+	// Hook para ajustar o número de itens por página com base no tamanho da tela.
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth < 640) setItemsPerPage(1);
@@ -22,20 +27,25 @@ const FeaturedProducts = ({ featuredProducts }) => {
 			else setItemsPerPage(4);
 		};
 
-		handleResize();
-		window.addEventListener("resize", handleResize);
+		handleResize(); // Executa a função uma vez na montagem.
+		window.addEventListener("resize", handleResize); // Adiciona o listener para o evento de redimensionamento.
+		// Função de limpeza para remover o listener quando o componente for desmontado.
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
+	// Função para avançar o carrossel.
 	const nextSlide = () => {
 		setCurrentIndex((prevIndex) => prevIndex + itemsPerPage);
 	};
 
+	// Função para retroceder o carrossel.
 	const prevSlide = () => {
 		setCurrentIndex((prevIndex) => prevIndex - itemsPerPage);
 	};
 
+	// Verifica se o botão "anterior" deve ser desabilitado.
 	const isStartDisabled = currentIndex === 0;
+	// Verifica se o botão "próximo" deve ser desabilitado.
 	const isEndDisabled = currentIndex >= featuredProducts.length - itemsPerPage;
 
 	return (
@@ -44,10 +54,12 @@ const FeaturedProducts = ({ featuredProducts }) => {
 				<h2 className='text-center text-5xl sm:text-6xl font-bold bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text mb-6'>Em destaque</h2>
 				<div className='relative'>
 					<div className='overflow-hidden'>
+						{/* O efeito de carrossel é criado movendo este contêiner horizontalmente com 'transform'. */}
 						<div
 							className='flex transition-transform duration-300 ease-in-out'
 							style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
 						>
+							{/* Mapeia a lista de produtos em destaque para renderizar um card para cada um. */}
 							{featuredProducts?.map((product) => (
 								<div key={product._id} className='w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 flex-shrink-0 px-2'>
 									<div className='bg-gradient-to-r from-[#ff64c4] to-[#606cfc] bg-opacity-10 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden h-full transition-all duration-300 hover:shadow-xl border border-pink-400'>
@@ -67,8 +79,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 											</p>
 											<button
 												onClick={() => handleAddToCart(product)}
-												className='w-full bg-gradient-to-r from-[#606cfc] to-[#ff64c4] hover:brightness-120 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
-												flex items-center justify-center'
+												className='w-full bg-gradient-to-r from-[#606cfc] to-[#ff64c4] hover:brightness-120 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 flex items-center justify-center'
 											>
 												<ShoppingCart className='w-5 h-5 mr-2' />
 												Adicionar ao carrinho
@@ -79,6 +90,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 							))}
 						</div>
 					</div>
+					{/* Botão para navegar para o slide anterior. */}
 					<button
 						onClick={prevSlide}
 						disabled={isStartDisabled}
@@ -90,6 +102,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 						<ChevronLeft className='w-6 h-6' />
 					</button>
 
+					{/* Botão para navegar para o próximo slide. */}
 					<button
 						onClick={nextSlide}
 						disabled={isEndDisabled}

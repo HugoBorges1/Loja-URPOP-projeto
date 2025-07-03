@@ -4,7 +4,9 @@ import axios from "../lib/axios";
 import { Users, Package, ShoppingCart, DollarSign } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
+// Componente para exibir a aba de estatísticas (analytics) no painel do administrador.
 const AnalyticsTab = () => {
+	// Estado para armazenar os dados gerais de analytics (usuários, produtos, etc.).
 	const [analyticsData, setAnalyticsData] = useState({
 		users: 0,
 		products: 0,
@@ -12,12 +14,16 @@ const AnalyticsTab = () => {
 		totalRevenue: 0,
 	});
 	const [isLoading, setIsLoading] = useState(true);
+	// Estado para armazenar os dados de vendas diárias para o gráfico.
 	const [dailySalesData, setDailySalesData] = useState([]);
 
+	// Hook que é executado uma vez quando o componente é montado para buscar os dados da API.
 	useEffect(() => {
 		const fetchAnalyticsData = async () => {
 			try {
+				// Faz uma requisição GET para a rota de analytics do backend.
 				const response = await axios.get("/analytics");
+				// Atualiza os estados com os dados recebidos da API.
 				setAnalyticsData(response.data.analyticsData);
 				setDailySalesData(response.data.dailySalesData);
 			} catch (error) {
@@ -30,12 +36,14 @@ const AnalyticsTab = () => {
 		fetchAnalyticsData();
 	}, []);
 
+	// Se os dados ainda estiverem carregando, exibe uma mensagem.
 	if (isLoading) {
 		return <div>Carregando...</div>;
 	}
 
 	return (
 		<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+			{/* Grid para exibir os cards com os dados gerais. */}
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
 				<AnalyticsCard
 					title='Usuários totais'
@@ -58,11 +66,13 @@ const AnalyticsTab = () => {
 					icon={DollarSign}
 				/>
 			</div>
+			{/* Gráfico de linhas para visualizar as vendas e receita diárias. */}
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5, delay: 0.25 }}
 			>
+				{/* O 'ResponsiveContainer' faz com que o gráfico se ajuste ao tamanho do contêiner pai. */}
 				<ResponsiveContainer width='100%' height={400}>
 					<LineChart data={dailySalesData}>
 						<CartesianGrid strokeDasharray='3 3' />
@@ -76,6 +86,7 @@ const AnalyticsTab = () => {
 							}}
 						/>
 						<Legend />
+						{/* Linha do gráfico para o número de vendas. */}
 						<Line
 							yAxisId='left'
 							type='monotone'
@@ -85,6 +96,7 @@ const AnalyticsTab = () => {
 							activeDot={{ r: 8 }}
 							name='Vendas'
 						/>
+						{/* Linha do gráfico para a receita. */}
 						<Line
 							yAxisId='right'
 							type='monotone'
@@ -102,6 +114,7 @@ const AnalyticsTab = () => {
 };
 export default AnalyticsTab;
 
+// Componente reutilizável para exibir um card de estatística.
 const AnalyticsCard = ({ title, value, icon: Icon }) => (
 	<motion.div
 		className={`bg-gradient-to-r from-[#606cfc] to-[#ff64c4] rounded-lg p-6 shadow-lg overflow-hidden relative`}

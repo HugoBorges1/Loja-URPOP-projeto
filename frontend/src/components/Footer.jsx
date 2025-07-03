@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Instagram, Twitter, Facebook } from "lucide-react";
 
+// Componente que renderiza o rodapé do site.
 const Footer = () => {
+    // Array de objetos que define as categorias de produtos e seus links.
     const categories = [
         { name: "Filmes", href: "/category/filmes" },
         { name: "Séries", href: "/category/series" },
@@ -11,6 +13,7 @@ const Footer = () => {
         { name: "Memes", href: "/category/memes" },
     ];
 
+    // Array de objetos que define os links para as redes sociais.
     const socialLinks = [
         { icon: Instagram, href: "https://instagram.com" },
         { icon: Twitter, href: "https://x.com" },
@@ -21,7 +24,9 @@ const Footer = () => {
         <div className="bg-black border-t border-gray-800">
             <div className="h-px bg-gradient-to-r from-transparent via-[#606cfc] to-transparent" />
             <div className="container mx-auto py-2">
+                {/* Layout em grid que se adapta: 3 colunas em telas médias e 1 coluna em telas pequenas. */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Coluna 1: Logo e slogan da loja. */}
                     <div className="flex flex-col items-center md:items-start">
                         <Link to='/' className='flex items-center'>
                             <span className='text-4xl font-notable font-bold bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text'>
@@ -33,6 +38,7 @@ const Footer = () => {
                         </p>
                     </div>
 
+                    {/* Coluna 2: Lista de links para as categorias de produtos. */}
                     <div className="text-center py-1">
                         <h3 className="font-bold text-white uppercase mb-4">Categorias de camisetas</h3>
                         <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
@@ -46,6 +52,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
+                    {/* Coluna 3: Links para redes sociais e páginas institucionais. */}
                     <div className="flex flex-col items-center md:items-end">
                         <h3 className="font-bold text-white uppercase mb-3">Siga-nos</h3>
                         <div className="flex space-x-4">
@@ -65,6 +72,7 @@ const Footer = () => {
                     </div>
                 </div>
 
+                {/* Seção de direitos autorais. */}
                 <div className="mt-6 pt-6 border-t border-gray-800 text-center text-gray-500 text-sm">
                     <p>&copy; {new Date().getFullYear()} URPOP. Todos os direitos reservados.</p>
                 </div>

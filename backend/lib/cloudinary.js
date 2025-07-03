@@ -1,6 +1,8 @@
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 
+//Conexão com a base de imagens do Cloudinary.
+
 dotenv.config();
 
 cloudinary.config({

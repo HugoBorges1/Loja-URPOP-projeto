@@ -70,13 +70,17 @@ const Navbar = () => {
 						)}
 
 						{/* Link para a página "Meus Pedidos". */}
-						<Link
-							to={"/my-orders"}
-							className='flex items-center text-gray-300 hover:text-white transition duration-300 ease-in-out'
-						>
-							<Package className='inline-block mr-1' size={20} />
-							<span className='hidden sm:inline'>Meus Pedidos</span>
-						</Link>
+						{user && (
+
+							<Link
+								to={"/my-orders"}
+								className='flex items-center text-gray-300 hover:text-white transition duration-300 ease-in-out'
+							>
+								<Package className='inline-block mr-1' size={20} />
+								<span className='hidden sm:inline'>Meus Pedidos</span>
+							</Link>
+
+						)}
 
 						{/* Renderização condicional: O link do carrinho só aparece se o usuário estiver logado. */}
 						{user && (

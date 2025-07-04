@@ -54,10 +54,24 @@ const Navbar = () => {
 
 					<nav className='flex flex-wrap items-center justify-end gap-x-4 gap-y-2'>
 
-						{/* Renderização condicional: Exibe as categorias se o usuário NÃO for um administrador. */}
-						{!isAdmin && (
+						{/* Renderização condicional: Exibe as categorias se o usuário NÃO for um administrador ou se não houver usuário logado. */}
+						{user && !isAdmin && (
 							<div className="text-center font-notable">
 								<ul className="flex flex-wrap justify-center gap-x-8 px-15">
+									{categories.map((category) => (
+										<li key={category.name}>
+											<Link to={category.href} className="font-bold bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text hover:text-white transition-colors">
+												{category.name}
+											</Link>
+										</li>
+									))}
+								</ul>
+							</div>
+						)}
+
+						{!user && (
+							<div className="text-center font-notable">
+								<ul className="flex flex-wrap justify-center gap-x-8 px-40">
 									{categories.map((category) => (
 										<li key={category.name}>
 											<Link to={category.href} className="font-bold bg-gradient-to-r from-[#606cfc] to-[#ff64c4] text-transparent bg-clip-text hover:text-white transition-colors">

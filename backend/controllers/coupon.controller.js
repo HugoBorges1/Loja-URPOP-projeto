@@ -22,7 +22,7 @@ export const validateCoupon = async (req, res) => {
 
 		// Se nenhum cupom for encontrado com esses critérios, retorna um erro 404.
 		if (!coupon) {
-			return res.status(404).json({ message: "Coupon not found" });
+			return res.status(404).json({ message: "Cupom não encontrado" });
 		}
 
 		// Verifica se a data de expiração do cupom já passou.
@@ -30,12 +30,12 @@ export const validateCoupon = async (req, res) => {
 			// Se o cupom estiver expirado, marca-o como inativo no banco de dados.
 			coupon.isActive = false;
 			await coupon.save();
-			return res.status(404).json({ message: "Coupon expired" });
+			return res.status(404).json({ message: "Cupom expirado" });
 		}
 
 		// Se o cupom for válido, retorna uma mensagem de sucesso com os detalhes do cupom.
 		res.json({
-			message: "Coupon is valid",
+			message: "Cupom válido",
 			code: coupon.code,
 			discountPercentage: coupon.discountPercentage,
 		});

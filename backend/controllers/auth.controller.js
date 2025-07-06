@@ -51,7 +51,7 @@ export const signup = async (req, res) => {
 		const userExists = await User.findOne({ email });
 
 		if (userExists) {
-			return res.status(400).json({ message: "User already exists" });
+			return res.status(400).json({ message: "Usuário já existente" });
 		}
 		// Cria um novo usuário no banco de dados. A senha é criptografada automaticamente pelo 'pre-save' hook no model 'User'.
 		const user = await User.create({ name, email, password });
@@ -100,7 +100,7 @@ export const login = async (req, res) => {
 			});
 		} else {
 			// Se as credenciais forem inválidas, retorna um erro.
-			res.status(400).json({ message: "Invalid email or password" });
+			res.status(400).json({ message: "Email ou senha inválidos" });
 		}
 	} catch (error) {
 		console.log("Error in login controller", error.message);

@@ -139,7 +139,7 @@ export const checkoutSuccess = async (req, res) => {
             if (existingOrder) {
                 return res.status(200).json({
                     success: true,
-                    message: "Order has already been processed.",
+                    message: "O pedido já foi processado.",
                     orderId: existingOrder._id,
                     orderNumber: existingOrder.orderNumber,
                 });
@@ -185,12 +185,12 @@ export const checkoutSuccess = async (req, res) => {
             // Retorna uma resposta de sucesso com os detalhes do novo pedido.
             res.status(200).json({
                 success: true,
-                message: "Payment successful, order created, and coupon deactivated if used.",
+                message: "Pagamento confirmado, pedido criado, e cupom consumido se utilizado.",
                 orderId: newOrder._id,
                 orderNumber: newOrder.orderNumber,
             });
         } else {
-            res.status(400).json({ success: false, message: "Payment not successful." });
+            res.status(400).json({ success: false, message: "Pagamento não confirmado." });
         }
     } catch (error) {
         console.error("Error processing successful checkout:", error);
